@@ -16,7 +16,7 @@ describe ArticleController do
     expect(result).to have_key(:data)
     expect(result[:ok]).to be true
     expect(result[:data]).to be_truthy
-    expect(result[:data][:title]).to eq('Title ABC')
+    expect(result[:data][0][:title]).to eq('Title ABC')
   end
 
   it 'gets all articles from db' do
@@ -52,7 +52,7 @@ describe ArticleController do
     expect(result[:ok]).to be true
     expect(result).to have_key(:obj)
     expect(result[:obj]).to be_truthy
-    expect(result[:obj].id).to eq(4)
+    expect(result[:obj].ids[0]).to eq(4)
   end
 
   it 'tries to update a non-existent article in db' do

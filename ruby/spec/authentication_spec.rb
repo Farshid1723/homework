@@ -10,10 +10,10 @@ require_relative './helpers/headers'
 describe HealthRoutes do
   include Rack::Test::Methods
 
-  let(:app) { HealthRoutes.new }
+  let(:app) { middleware = AuthMiddleware.new(HealthRoutes.new) }
 
   context 'testing health endpoint for authentication' do
-
+    header = prepare_headers(HeaderType::HTTP_AUTH)
     let(:response) { get '/', nil, prepare_headers(HeaderType::HTTP_AUTH) }
 
     it 'checks response status and body' do

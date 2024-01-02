@@ -26,8 +26,8 @@ describe ArticleRoutes do
   include Rack::Test::Methods
 
   let(:app) { ArticleRoutes.new }
-  let(:auth_header) {prepare_headers(HeaderType::HTTP_AUTH)}
-  let(:content_type_header) {prepare_headers(HeaderType::CONTENT_TYPE)}
+  let(:auth_header) { prepare_headers(HeaderType::HTTP_AUTH) }
+  let(:content_type_header) { prepare_headers(HeaderType::CONTENT_TYPE) }
 
   before(:all) do
     require_relative '../config/environment'
@@ -35,10 +35,8 @@ describe ArticleRoutes do
   end
 
   context 'testing the get articles endpoint GET /' do
-    let(:response) { get '/', nil, auth_header}
-
+    let(:response) { get '/', nil, auth_header }
     it 'checks response status and body' do
-
       expect(response.status).to eq 200
       hashed_response = JSON.parse(response.body)
       expect(hashed_response).to have_key('articles')
@@ -51,9 +49,10 @@ describe ArticleRoutes do
 
     it 'checks response status and body' do
       expect(response.status).to eq 200
+      puts "\n response body", response
       hashed_response = JSON.parse(response.body)
-      expect(hashed_response).to have_key('article')
-      expect(hashed_response['article']).to be_truthy
+      expect(hashed_response).to have_key('articles')
+      expect(hashed_response['articles']).to be_truthy
     end
   end
 
@@ -71,7 +70,7 @@ describe ArticleRoutes do
   context 'testing the create article endpoint ' do
     let(:response) do
       post '/', JSON.generate('title' => 'Route Test Article', 'content' => 'test content'),
-      prepare_headers 
+           prepare_headers
     end
 
     it 'checks response status and body' do
@@ -85,7 +84,7 @@ describe ArticleRoutes do
   context 'testing the update article endpoint ' do
     let(:response) do
       put '/2', JSON.generate('title' => 'Updated Test Article', 'content' => 'update'),
-      prepare_headers
+          prepare_headers
     end
 
     it 'checks response status and body' do

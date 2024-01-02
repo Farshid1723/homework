@@ -2,8 +2,8 @@
 name: rubyweb
 
 templates:
-  ctl.ebr: tmp/ctl
-  config.ebr: tmp/config.yml
+  ctl.erb: tmp/ctl
+  config.erb: tmp/config.yml
 
 packages:
 - ruby
